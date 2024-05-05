@@ -1,18 +1,26 @@
 import React, { useState, useCallback, useEffect } from "react";
-import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
-import ExportToCsv from "../../common/ExportToCsv";
-import CreateNewEntityButton from "../../common/CreateNewRow";
+import {
+  MaterialReactTable,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
+} from "material-react-table";
+import ExportToCsv from "../../components/common/ExportToCsv";
+import CreateNewEntityButton from "../../components/common/CreateNewRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
 // Define the CourseOutcome type for the Course Outcome table
+
+// Define the CourseOutcome type for the Course Outcome table
 type CourseOutcome = {
-  _id: string;
+  _id: any;
   courseId: string;
-  content: string;
+  CO_Code: string;
+  Course_Outcome: string;
   bloomsLevel: string;
-  courseCode?: string;
+  Delivery_Methods: string;
+  content: string;
 };
 
 const API_BASE_URL = 'http://localhost:5000';
@@ -28,11 +36,15 @@ const CourseOutcomes = () => {
   // Function to fetch course outcomes from the backend
   const fetchCourseOutcomes = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/course_outcome/all-course-outcomes`);
-      const outcomesWithCodes = await Promise.all(response.data.map(async (outcome: CourseOutcome) => {
-        const courseDetails = await fetchCourseDetails(outcome.courseId);
-        return { ...outcome, courseCode: courseDetails.code };
-      }));
+      const response = await axios.get(
+        `${API_BASE_URL}/course_outcome/all-course-outcomes`
+      );
+      const outcomesWithCodes = await Promise.all(
+        response.data.map(async (outcome: CourseOutcome) => {
+          const courseDetails = await fetchCourseDetails(outcome.courseId);
+          return { ...outcome, courseCode: courseDetails.code };
+        })
+      );
       setTableData(outcomesWithCodes);
     } catch (error) {
       console.error("Error fetching course outcomes:", error);
@@ -53,9 +65,12 @@ const CourseOutcomes = () => {
   // Function to handle adding a new row (CO)
   const handleAddRow = async (newData: CourseOutcome) => {
     try {
-      console.log(newData)
-      const response = await axios.post(`${API_BASE_URL}/course_outcome/new-course-outcome`, newData);
-      setTableData(prevData => [...prevData, response.data]);
+      console.log(newData);
+      const response = await axios.post(
+        `${API_BASE_URL}/course_outcome/new-course-outcome`,
+        newData
+      );
+      setTableData((prevData) => [...prevData, response.data]);
       fetchCourseOutcomes();
     } catch (error) {
       console.error("Error adding new course outcome:", error);
@@ -63,31 +78,38 @@ const CourseOutcomes = () => {
   };
 
   // Function to handle deleting a row (CO)
-// Function to handle deleting a row (CO)
-const handleDeleteRow = async (originalRow: CourseOutcome) => {
-  try {
-    await axios.delete(`${API_BASE_URL}/course_outcome/${originalRow._id}`);
-    setTableData(prevData => prevData.filter(row => row._id !== originalRow._id));
-  } catch (error) {
-    console.error("Error deleting course outcome:", error);
-  }
-};
+  // Function to handle deleting a row (CO)
+  const handleDeleteRow = async (originalRow: CourseOutcome) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/course_outcome/${originalRow._id}`);
+      setTableData((prevData) =>
+        prevData.filter((row) => row._id !== originalRow._id)
+      );
+    } catch (error) {
+      console.error("Error deleting course outcome:", error);
+    }
+  };
 
   const columns: MRT_ColumnDef<CourseOutcome>[] = [
     {
-      accessorKey: "courseCode",
-      header: "Course ID",
+      accessorKey: "CO_Code",
+      header: "CO Code",
       size: 150,
     },
     {
-      accessorKey: "content",
-      header: "Course Outcome (Content)",
+      accessorKey: "Course_Outcome",
+      header: "Course Outcome (CO)",
       size: 200,
     },
     {
-      accessorKey: "bloomsLevel",
+      accessorKey: "Bloom_Level",
       header: "Bloom's Level",
       size: 150,
+    },
+    {
+      accessorKey: "Delivery_Methods",
+      header: "Delivery Methods",
+      size: 200,
     },
   ];
 
@@ -107,39 +129,39 @@ const handleDeleteRow = async (originalRow: CourseOutcome) => {
               courseId: newData.courseId,
               content: newData.content,
               bloomsLevel: newData.bloomsLevel,
+              CO_Code: "",
+              Course_Outcome: "",
+              Delivery_Methods: ""
             });
           }}
         />
-        <ExportToCsv data={tableData} type="data" /> 
+        <ExportToCsv data={tableData} type="data" />
       </div>
       <MaterialReactTable
         columns={columns}
         data={tableData}
-        editingMode="modal"
+        // editingMode="modal" 
         enableEditing
         enableRowActions
-        renderRowActions={({ row }) => (
-    <div>
-      {/* <EditIcon
-        className="mr-4 primary"
-        onClick={() => {
-          // Handle edit action
-        }}
-        color="success"
-      /> */}
-      <DeleteIcon
-        onClick={() => {
-            console.log(row.original); 
-            handleDeleteRow(row.original);
-        }}
-        color="error"
+        renderRowActions={({ row, table }) => (
+          <div>
+            <EditIcon
+              className="mr-4 primary"
+              onClick={() => {
+                table.setEditingRow(row);
+              }}
+              color="success"
+            />
+            <DeleteIcon
+              onClick={() => handleDeleteRow(row.original as CourseOutcome)}
+              color="error"
+            />
+          </div>
+        )}
       />
-    </div>
-  )}
-/>
-
     </div>
   );
 };
+
 
 export default CourseOutcomes;

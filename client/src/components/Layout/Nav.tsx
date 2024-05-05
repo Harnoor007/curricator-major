@@ -40,11 +40,10 @@ function StickyNavbar(props: any) {
       ) : (
         <>
           <Typography
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal cursor-pointer"
-          >
+              as="li"
+              variant="small"
+              color="blue-gray"
+              className="p-1 font-normal cursor-pointer"           >
             <Link to={'/dashboard'} className={`flex items-center ${location.pathname === '/dashboard' ? 'text-teal-200 font-bold text-lg' : 'text-black'}`}>
               Dashboard
             </Link>

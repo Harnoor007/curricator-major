@@ -3,11 +3,17 @@ import {
   MaterialReactTable,
   MRT_ColumnDef,
 } from 'material-react-table';
-import ExportToCsv from "../../common/ExportToCsv";
+import ExportToCsv from "../../components/common/ExportToCsv";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CreateNewEntityButton from "../../common/buttontest";
-import { getAllDepartments, getAllCurriculums, addCurriculum, deleteCurriculum, getAllPrograms  } from '../../services/db';
+import CreateNewEntityButton from "../../components/common/buttontest";
+import {
+  getAllDepartments,
+  getAllCurriculums,
+  addCurriculum,
+  deleteCurriculum,
+  getAllPrograms,
+} from "../../utils/db";
 import { DepartmentData, CurriculumData } from '../../types/types';
 import axios from 'axios';
 

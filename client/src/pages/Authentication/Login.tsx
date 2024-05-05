@@ -1,124 +1,178 @@
-import {
-  Input,
-  Checkbox,
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Tooltip,
-  Select,
-  Option,
-    
-} from "@material-tailwind/react";
-
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-export default function SimpleRegistrationForm() {
+// Define API URL based on environment variables
 
-  const navigate = useNavigate()
+
+// Define type for Login component state
+interface Credentials {
+  username: string;
+  password: string;
+  name:any;
+}
+
+export default function Login() {
+  const [credentials, setCredentials] = useState<Credentials>({
+    username: "",
+    password: "",
+    name: undefined
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{ username: string; password: string }>({
+    username: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const isLoggedIn = localStorage.getItem("authtoken");
+  //   if (isLoggedIn) {
+  //     navigate("/home");
+  //   }
+  // }, [navigate]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField(name, value),
+    }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+     
+   
+
+      const response = await fetch(`http://localhost:5000/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      });
+      const json = await response.json();
+console.log(json)
+      if (json.success) {
+     alert("Success")
+        }
+       else {
+        alert("Fail")
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  const validateField = (fieldName: keyof Credentials, value: string) => {
+    switch (fieldName) {
+      case "password":
+        return value.length >= 8
+          ? ""
+          : "Password must be at least 8 characters long";
+      default:
+        return "";
+    }
+  };
+
   return (
-    <div className="flex justify-around items-center h-screen bg-gray-100 ">
-      {/* image */}
-      <Card className="w-min h-max">
-      <CardHeader floated={false} className="w-max p-5">
-        <img src={require('../images/logo.png')} alt="profile-picture" className="w-96 h-96"/>
-      </CardHeader>
-      <CardBody className="text-center">
-        <Typography variant="h4" color="blue-gray" className="mb-2">
-          Welcome to AICTE Unified Portal for Curriculum design  
+    <Container component="main" maxWidth="xs" style={{ marginBottom: "100px" }}>
+      <CssBaseline />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: 5,
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Sign in
         </Typography>
-        <Typography color="blue-gray" className="font-medium" textGradient>
-          Login Using Credentials
-        </Typography>
-      </CardBody>
-      <CardFooter className="flex justify-center gap-7 pt-2">
-        <Tooltip content="Like">
-          <Typography
-            as="a"
-            href="#facebook"
-            variant="lead"
-            color="blue"
-            textGradient
-          >
-            <i className="fab fa-facebook" />
-          </Typography>
-        </Tooltip>
-        <Tooltip content="Follow">
-          <Typography
-            as="a"
-            href="#twitter"
-            variant="lead"
-            color="light-blue"
-            textGradient
-          >
-            <i className="fab fa-twitter" />
-          </Typography>
-        </Tooltip>
-        <Tooltip content="Follow">
-          <Typography
-            as="a"
-            href="#instagram"
-            variant="lead"
-            color="purple"
-            textGradient
-          >
-            <i className="fab fa-instagram" />
-          </Typography>
-        </Tooltip>
-      </CardFooter>
-    </Card>
-
-      {/* siginin conatiner */}
-      <Card className="py-5 px-5" shadow={true}>
-        <Typography variant="h4" color="blue-gray">
-          Sign Up
-        </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
-          Enter your details to register.
-        </Typography>
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-          <div className="mb-4 flex flex-col gap-6">
-            <Input size="lg" label="UserName" crossOrigin={undefined} />
-            <Input type="password" size="lg" label="Password" crossOrigin={undefined} />
-            <Select label="Select Role">
-              <Option>Admin</Option>
-              <Option>Curriculum Developer</Option>
-              <Option>Subject Admin</Option>
-              <Option>Educator</Option>
-          </Select>
-          </div>
-          <Checkbox
-              color="teal"
-            label={<Typography
-              variant="small"
-              color="gray"
-              className="flex items-center font-normal"
-            >
-              I agree the
-              <a
-                href="#"
-                className="font-medium transition-colors hover:text-gray-900"
-              >
-                &nbsp;Terms and Conditions
-              </a>
-            </Typography>}
-            containerProps={{ className: "-ml-2.5" }} crossOrigin={undefined}          />
-          <div className="mt-6 text-center">
-            <Button 
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
             fullWidth
-            onClick={()=>{navigate('/ ')}}
-            >Sign In</Button>
-          </div>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Don't have an account?{" "}
-            <a href="#" className="font-medium text-gray-900">
-              Contact Admin
-            </a>
-          </Typography>
-        </form>
-      </Card>
-    </div>
+            id="username"
+            label="Username/username"
+            name="username"
+            placeholder="1234567"
+            value={credentials.username}
+            onChange={handleChange}
+            autoFocus
+            error={Boolean(errors.username)}
+            helperText={errors.username}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            value={credentials.password}
+            type={showPassword ? "text" : "password"} // Show password text if showPassword is true
+            onChange={handleChange}
+            error={Boolean(errors.password)}
+            helperText={errors.password}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    onMouseDown={(e) => e.preventDefault()}
+                  >
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : "Sign In"}
+          </Button>
+          
+        </Box>
+      </Box>
+    </Container>
   );
+
+
 }

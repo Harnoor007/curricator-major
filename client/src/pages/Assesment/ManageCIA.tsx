@@ -4,10 +4,10 @@ import {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
 } from 'material-react-table';
-import ExportToCsv from '../../common/ExportToCsv';
+import ExportToCsv from '../../components/common/ExportToCsv';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CreateNewEntityButton from '../../common/CreateNewRow';
+import CreateNewEntityButton from '../../components/common/CreateNewRow';
 
 // Define the ManageCIA type for the Manage CIA table
 type ManageCIA = {
