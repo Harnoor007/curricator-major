@@ -7,9 +7,9 @@ import {
 } from "material-react-table";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CreateNewEntityButton from "../../common/CreateNewRow";
-import ExportToCsv from "../../common/ExportToCsv";
-import { getAllDepartments, deleteProgram, addProgram, getAllPrograms } from "../../services/db";
+import CreateNewEntityButton from "../../components/common/CreateNewRow";
+import ExportToCsv from "../../components/common/ExportToCsv";
+import { getAllDepartments, deleteProgram, addProgram, getAllPrograms } from "../../utils/db";
 import { ProgramData, DepartmentData } from '../../types/types';
 
 const Program = () => {

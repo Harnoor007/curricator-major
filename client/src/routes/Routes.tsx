@@ -24,8 +24,8 @@ import App from "../App.tsx";
 const Root: React.FC = () => (
   <Router>
     <Routes>
-          <Route path="/" element={<App />}></Route>
-      <Route path="/login" element={<Login />} />
+          {/* <Route path="/" element={<App />}></Route> */}
+      <Route path="/" element={<Login />} />
       <Route path="/dashboard" element={<AdminDashboard />} />
       <Route path="/curriculum" element={<CurriculumPage />}>
         <Route index element={<Curriculum />} />

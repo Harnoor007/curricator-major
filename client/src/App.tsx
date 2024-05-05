@@ -1,16 +1,17 @@
 
-import { Outlet } from "react-router-dom";
+
 import Nav from "./components/Layout/Nav";
+import Root from "./routes/Routes";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
 
 
   return (
     <>
-      <>
-        <Nav />
-        <Outlet />
-      </>
+     
+          <Root />
+       
     </>
   );
 }

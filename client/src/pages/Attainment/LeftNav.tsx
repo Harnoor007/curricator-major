@@ -7,37 +7,36 @@ import {
     ListItemSuffix,
     Chip,
   } from "@material-tailwind/react";
-  import {
-    AcademicCapIcon,
-    GlobeEuropeAfricaIcon,
-    BriefcaseIcon,
-    TableCellsIcon,
-    CalendarDaysIcon,
-    PuzzlePieceIcon,
-    DocumentIcon,
-    DocumentTextIcon,
-    GiftIcon,
-    GiftTopIcon,
-    Square3Stack3DIcon,
-    LinkIcon,
-    ClockIcon,
-  } from "@heroicons/react/24/solid";
+ import {
+   School as AcademicCapIcon,
+   Public as GlobeEuropeAfricaIcon,
+   Work as BriefcaseIcon,
+   TableChart as TableCellsIcon,
+   Event as CalendarDaysIcon,
+   Extension as PuzzlePieceIcon,
+   Description as DocumentIcon,
+   Notes as DocumentTextIcon,
+   Redeem as GiftIcon,
+   CardGiftcard as GiftTopIcon,
+   ViewComfy as Square3Stack3DIcon,
+   InsertLink as LinkIcon,
+   Schedule as ClockIcon,
+ } from "@mui/icons-material";
   import { Link } from "react-router-dom";
-import { DockOutlined, DockRounded } from "@mui/icons-material";
    
   export default function DefaultSidebar() {
     return (
       <div className="shadow-xl z-10">
-      <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+      <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
         <div className="mb-2 p-4">
-          <Typography variant="h5" color="blue-gray">
+          <Typography variant="h5" color="blue-gray"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
             Attainment Page
           </Typography>
         </div>
-        <List>
+        <List  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
         <Link to={'department'} relative="route">
-          <ListItem>
-              <ListItemPrefix>
+          <ListItem  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+              <ListItemPrefix  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                 <GiftIcon
    className="h-5 w-5" />
               </ListItemPrefix>
@@ -46,8 +45,8 @@ import { DockOutlined, DockRounded } from "@mui/icons-material";
         </Link>
   
         <Link to={'ExtraCurricular'} relative="route">
-        <ListItem>
-            <ListItemPrefix>
+        <ListItem  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <ListItemPrefix  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <GiftTopIcon className="h-5 w-5" />
             </ListItemPrefix>
             PO Attainment
@@ -55,8 +54,8 @@ import { DockOutlined, DockRounded } from "@mui/icons-material";
         </Link>
   
         <Link to={'program_outcomes'} relative="route">
-          <ListItem>
-            <ListItemPrefix>
+          <ListItem  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <ListItemPrefix  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <Square3Stack3DIcon   className="h-5 w-5" />
             </ListItemPrefix>
             Consolidated PO Attainment
@@ -64,20 +63,20 @@ import { DockOutlined, DockRounded } from "@mui/icons-material";
         </Link>
   
         <Link to={'course'} relative='route' >
-          <ListItem>
-            <ListItemPrefix>
+          <ListItem  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <ListItemPrefix  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <LinkIcon className="h-5 w-5" />
             </ListItemPrefix>
             PO & PSO Attainment
-            <ListItemSuffix>
+            <ListItemSuffix  children ={undefined} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               {/* <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" /> */}
             </ListItemSuffix>
           </ListItem>
         </Link>
   
         <Link to={'course_outcomes'} relative='route' >
-          <ListItem>
-            <ListItemPrefix>
+          <ListItem  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <ListItemPrefix  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <ClockIcon className="h-5 w-5" />
             </ListItemPrefix>
             CAY Attainment
@@ -85,8 +84,8 @@ import { DockOutlined, DockRounded } from "@mui/icons-material";
         </Link>
   
         <Link to={'cos_pos_mapping'}>
-          <ListItem>
-            <ListItemPrefix>
+          <ListItem  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <ListItemPrefix  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <DocumentTextIcon className="h-5 w-5" />
             </ListItemPrefix>
             Branch Wise PO Attainment

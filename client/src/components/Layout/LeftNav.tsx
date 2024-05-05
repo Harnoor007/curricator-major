@@ -8,15 +8,14 @@ import {
   Chip,
 } from "@material-tailwind/react";
 import {
-  HomeIcon,
-  InboxIcon,
-  HomeModernIcon,
-  AcademicCapIcon,
-  GlobeAsiaAustraliaIcon,
-  GlobeEuropeAfricaIcon,
-  ArrowsUpDownIcon,
-  BookmarkIcon
-} from "@heroicons/react/24/solid";
+  Home as HomeIcon,
+  Inbox as InboxIcon,
+  School as AcademicCapIcon,
+  Public as GlobeAsiaAustraliaIcon,
+  Public as GlobeEuropeAfricaIcon,
+  CompareArrows as ArrowsUpDownIcon,
+  Bookmark as BookmarkIcon,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 export default function DefaultSidebar() {

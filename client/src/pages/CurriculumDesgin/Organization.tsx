@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react';
-import { getOrganizationByName } from '../../services/db';
-import { text } from 'stream/consumers';
-import ErrorComponent from '../errorPage/Error';
-import { CheckIcon } from '@heroicons/react/24/solid';
+import { getOrganizationByName } from "../../utils/db";
+import ErrorComponent from '../../components/errorPage/Error';
 
 type OrganizationProps = {
   organizationName: string;

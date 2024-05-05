@@ -3,8 +3,8 @@ import {
   MaterialReactTable,
   MRT_ColumnDef,
 } from "material-react-table";
-import ExportToCsv from "../../common/ExportToCsv";
-import CreateNewEntityButton from "../../common/CreateNewRow";
+import ExportToCsv from "../../components/common/ExportToCsv";
+import CreateNewEntityButton from "../../components/common/CreateNewRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from 'axios'; 

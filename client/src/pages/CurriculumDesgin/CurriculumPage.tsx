@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import DefaultSidebar from "../Layout/LeftNav"
+import DefaultSidebar from "../../components/Layout/LeftNav"
 
 export default function CurriculumPage(){
   return(

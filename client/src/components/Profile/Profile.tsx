@@ -1,7 +1,7 @@
 import { Checkbox, Option, Select } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { Button } from '@material-tailwind/react';
-import { PencilIcon } from "@heroicons/react/24/solid";
+import EditIcon from "@mui/icons-material/Edit";
 const Profile: React.FC = () => {
   const [isLogHistoryEnabled, setLogHistoryEnabled] = useState<boolean>(false);
 
@@ -12,14 +12,11 @@ const Profile: React.FC = () => {
   return (
     <div className="profile">
       <header className="bg-teal-700 text-white py-4 px-6 rounded-md mx-12">
-        <h1 className="text-3xl font-semibold text-center">
-          Profile
-        </h1>
+        <h1 className="text-3xl font-semibold text-center">Profile</h1>
         {/* Add any additional information here */}
       </header>
       <div className="min-h-screen flex justify-between">
         <div className="w-96 h-96 rounded-md  bg-gray-200 my-12 flex items-center justify-center p-8 ml-12">
-
           {/* Image Column */}
           <div className="">
             <img
@@ -31,33 +28,28 @@ const Profile: React.FC = () => {
         </div>
 
         <div className="w-full md:w-2/3 p-6 bg-gray-200 rounded-md mt-12 mr-12">
-        <div className=" mb-6 col-span-2 mt-4 flex flex-row justify-between">
-                <div className="flex items-center space-x-2">
-                <label
-                  htmlFor="logHistory"
-                  className="block text-l font-medium text-gray-700"
-                >
-                  Log History
-                </label>
-                <Checkbox crossOrigin={undefined} 
-                  color="teal"
-                  onClick={handleLogHistoryToggle}
-                />
-                </div>
-                <div className="flex flex-row gap-3">
-                <Button
-                  variant="outlined"
-                  >
-                    <PencilIcon className='w-5 h-5 mr-1 my-0 '/>  
-                  {/* Edit */}
-                </Button>
-                <Button
-
-                >
-                  Save
-                </Button>
-                </div>
-              </div>
+          <div className=" mb-6 col-span-2 mt-4 flex flex-row justify-between">
+            <div className="flex items-center space-x-2">
+              <label
+                htmlFor="logHistory"
+                className="block text-l font-medium text-gray-700"
+              >
+                Log History
+              </label>
+              <Checkbox
+                crossOrigin={undefined}
+                color="teal"
+                onClick={handleLogHistoryToggle}
+              />
+            </div>
+            <div className="flex flex-row gap-3">
+              <Button variant="outlined">
+                <EditIcon className="w-5 h-5 mr-1 my-0 " />
+                {/* Edit */}
+              </Button>
+              <Button>Save</Button>
+            </div>
+          </div>
           <form>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-md ==">
               {/* <div className="mb-4">
@@ -75,7 +67,7 @@ const Profile: React.FC = () => {
                   name="email"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='user@institution.com'
+                  value="user@institution.com"
                 />
               </div>
               <div className="mb-4">
@@ -91,7 +83,7 @@ const Profile: React.FC = () => {
                   name="firstName"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='User'
+                  value="User"
                 />
               </div>
               <div className="mb-4">
@@ -107,7 +99,7 @@ const Profile: React.FC = () => {
                   name="lastName"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='User'
+                  value="User"
                 />
               </div>
 
@@ -124,7 +116,7 @@ const Profile: React.FC = () => {
                   name="department"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='Applied Science'
+                  value="Applied Science"
                 />
               </div>
               <div className="mb-4">
@@ -140,7 +132,7 @@ const Profile: React.FC = () => {
                   name="qualification"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='PhD'
+                  value="PhD"
                 />
               </div>
               <div className="mb-4">
@@ -156,7 +148,7 @@ const Profile: React.FC = () => {
                   name="experience"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='20'
+                  value="20"
                 />
               </div>
               <div className="mb-4">
@@ -172,7 +164,7 @@ const Profile: React.FC = () => {
                   name="designation"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='Assistant Professor'
+                  value="Assistant Professor"
                 />
               </div>
               <div className="mb-4">
@@ -188,7 +180,7 @@ const Profile: React.FC = () => {
                   name="resetPassword"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='password1'
+                  value="password1"
                 />
               </div>
               <div className="mb-4">
@@ -224,11 +216,9 @@ const Profile: React.FC = () => {
                   name="confirmPassword"
                   required
                   className="mt-1 p-2 border rounded-md w-full"
-                  value='password1'
+                  value="password1"
                 />
               </div>
-
-              
             </div>
           </form>
         </div>

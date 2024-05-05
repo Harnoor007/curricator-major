@@ -5,9 +5,13 @@ import {
 } from "material-react-table";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CreateNewEntityButton from "../../common/CreateNewRow";
-import ExportToCsv from "../../common/ExportToCsv";
-import { getAllDepartments, addDepartment, deleteDepartment } from "../../services/db";
+import CreateNewEntityButton from "../../components/common/CreateNewRow";
+import ExportToCsv from "../../components/common/ExportToCsv";
+import {
+  getAllDepartments,
+  addDepartment,
+  deleteDepartment,
+} from "../../utils/db";
 import { DepartmentData } from '../../types/types' 
 import { Button, Modal, TextField } from "@mui/material";
 
