@@ -23,7 +23,7 @@ interface AdminDashboardProps { }
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Button
-            onClick={() => navigate("/curriculum")}
+            onClick={() => navigate("/curriculumPage")}
             fullWidth
             variant="contained"
             color="primary"

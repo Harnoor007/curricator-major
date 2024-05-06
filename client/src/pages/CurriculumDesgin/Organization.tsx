@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react';
+import { Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 import { getOrganizationByName } from "../../utils/db";
 import ErrorComponent from '../../components/errorPage/Error';
 
@@ -32,75 +32,45 @@ const Organization: React.FC<OrganizationProps> = ({ organizationName }): JSX.El
 
     fetchOrganizationData();
   }, [organizationName]);
-  if (loading) return <text>'Loading...'</text>; // or 'Loading...' if you want to display a message
-  if (error) return <ErrorComponent message={error} />
+  
+  if (loading) return <Typography>Loading...</Typography>;
+  if (error) return <ErrorComponent message={error} />;
+  
   return (
-    <React.Fragment>
-      <Card color="teal" variant="gradient" className="w-full p-7 h-min">
-        <CardHeader
-          floated={false}
-          shadow={false}
-          color="transparent"
-          className="m-0 mb-4 rounded-none border-b-2 border-white/40 pb-4 text-center"
+    <Card>
+      <CardHeader
+        title={organizationData?.name}
+        titleTypographyProps={{ variant: "h1", color: "white" }}
+        sx={{
+          background: 'teal',
+          mb: 4,
+          pb: 4,
+          textAlign: 'center',
+        }}
+      />
+      <CardContent sx={{ display: 'flex', justifyContent: 'space-between', gap: 5 }}>
+        <div>
+          <Typography variant="h3" color="Balck" sx={{ mb: 1 }}>Vision</Typography>
+          <Typography variant="h6" color="Black" sx={{ mb: 1 }}>{organizationData?.vision}</Typography>
+        </div>
+        <div>
+          <Typography variant="h3" color="Black" sx={{ mb: 1 }}>Mission</Typography>
+          <Typography variant="h6" color="Black" sx={{ mb: 1 }}>{organizationData?.mission}</Typography>
+        </div>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="outlined"
+          size="large"
+          color="inherit"
+          fullWidth
+          disabled
+          sx={{ '&:hover': { transform: 'scale(1.02)' } }}
         >
-          <Typography
-            variant="h1"
-            color="white"
-            className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-          >
-            {organizationData?.name}
-          </Typography>
-        </CardHeader>
-        <CardBody className="p-0 flex flex-row justify-between gap-5">
-          <div>
-            <Typography
-              variant="h3"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-4xl font-normal text-justify"
-            >
-              Vision
-            </Typography>
-            <Typography
-              variant="h3"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-sm font-normal"
-            >
-              {organizationData?.vision}
-            </Typography>
-          </div>
-
-          <div>
-            <Typography
-              variant="h3"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-4xl font-normal"
-            >
-              Mission
-            </Typography>
-            <Typography
-              variant="h3"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-sm font-normal text-justify"
-            >
-              {organizationData?.mission}
-            </Typography>
-          </div>
-
-        </CardBody>
-        <CardFooter className="mt-12 p-0">
-          <Button
-            size="lg"
-            color="white"
-            className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
-            ripple={false}
-            fullWidth={true}
-            disabled
-          >
-            Can only be set up by a organization database admin!
-          </Button>
-        </CardFooter>
-      </Card>
-    </React.Fragment>
+          Can only be set up by a organization database admin!
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 

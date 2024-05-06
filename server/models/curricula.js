@@ -15,9 +15,8 @@ const organizationSchema = new mongoose.Schema({
 const departmentSchema = new mongoose.Schema({
   name: { type: String, unique: true, require: true },
   vision: { type: String },
-  mission: { type: String }, 
-  organization: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
-  head: { type: String }
+  mission: { type: String },
+  year: {type: Number}
 });
   
 const programSchema = new mongoose.Schema({
