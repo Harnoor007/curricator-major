@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import AdminDashboard from "../pages/Home/Home.tsx";
 import Attainment from "../pages/Attainment/AttainmentPage";
 import Assesment from "../pages/Assesment/AssesmentPage";
-import CurriculumPage from "../pages/CurriculumDesgin/CurriculumPage";
+import CurriculumPage from "../pages/CurriculumDesgin/CurriculumPage.tsx";
 import CourseList from "../pages/CurriculumDesgin/Course";
 import Program_Outcomes from "../pages/CurriculumDesgin/Program_Outcomes";
 import Curriculum from "../pages/CurriculumDesgin/Curriculum";
@@ -35,6 +35,7 @@ const RouteComponent: React.FC = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<ProtectedRoute path="/home" component={AdminDashboard} />} />
       <Route path="/dashboard" element={<AdminDashboard />} />
+
       <Route path="/curriculum" element={<CurriculumPage />}>
         <Route index element={<Curriculum />} />
         <Route path="course" element={<CourseList />} />
@@ -43,10 +44,7 @@ const RouteComponent: React.FC = () => (
         <Route path="design" element={<Curriculum />} />
         <Route path="department" element={<Department />} />
         <Route path="course_outcomes" element={<CourseOutcomes />} />
-        <Route
-          path="organization"
-          element={<Organization organizationName="GNDEC" />}
-        />
+        <Route path="organization" element={<Organization organizationName="GNDEC" />} />
         <Route path="program" element={<Program />} />
       </Route>
 

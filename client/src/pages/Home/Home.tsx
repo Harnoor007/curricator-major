@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SchoolIcon from "@mui/icons-material/School";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
@@ -8,8 +8,15 @@ import { Grid, Card, Typography, Button } from "@mui/material";
 
 interface AdminDashboardProps { }
 
-const AdminDashboard: React.FC<AdminDashboardProps> = () => {
+  const AdminDashboard: React.FC<AdminDashboardProps> = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      navigate("/login"); // Redirect to login if token is not present
+    }
+  }, [navigate]);
 
   return (
     <Card sx={{ padding: "1rem", margin:"5rem" }}>
@@ -34,7 +41,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Button
-            onClick={() => navigate("/attainment")}
+            onClick={() => navigate("/curriculum")}
             fullWidth
             variant="contained"
             color="primary"

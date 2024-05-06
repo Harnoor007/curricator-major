@@ -58,7 +58,7 @@ export default function Login() {
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: validateField(name, value),
+      [name]: validateField(name as keyof Credentials, value),
     }));
   };
 
@@ -128,7 +128,7 @@ export default function Login() {
             id="username"
             label="Username/username"
             name="username"
-            placeholder="1234567"
+            placeholder="Username"
             value={credentials.username}
             onChange={handleChange}
             autoFocus
