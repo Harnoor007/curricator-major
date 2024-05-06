@@ -3,16 +3,16 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
+  ListItemIcon,
+  ListItemText,
   Chip,
-} from "@material-tailwind/react";
+} from "@mui/material";
 import {
   Home as HomeIcon,
   Inbox as InboxIcon,
   School as AcademicCapIcon,
   Public as GlobeAsiaAustraliaIcon,
-  Public as GlobeEuropeAfricaIcon,
+  PublicOff as GlobeEuropeAfricaIcon,
   CompareArrows as ArrowsUpDownIcon,
   Bookmark as BookmarkIcon,
 } from "@mui/icons-material";
@@ -23,103 +23,83 @@ export default function DefaultSidebar() {
     <div className="shadow-xl z-10">
       <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
         <div className="mb-2 p-4">
-          <Typography variant="h5" color="blue-gray">
+          <Typography variant="h5" color="textPrimary">
             Curriculum Page
           </Typography>
         </div>
         <List>
-          <Link to={"organization"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <HomeIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Organization
+          <Link to="/curriculumPage/organization">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Organization" />
             </ListItem>
           </Link>
 
-          <Link to={"department"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <HomeModernIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Department
+          <Link to="/curriculumPage/department">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Department" />
             </ListItem>
           </Link>
 
-          <Link to={"program"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <BookmarkIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Program
+          <Link to="/program">
+            <ListItem button>
+              <ListItemIcon>
+                <BookmarkIcon />
+              </ListItemIcon>
+              <ListItemText primary="Program" />
             </ListItem>
           </Link>
 
-          <Link to={"design"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <AcademicCapIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Curriculum
+          <Link to="/curriculumPage/design">
+            <ListItem button>
+              <ListItemIcon>
+                <AcademicCapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Curriculum" />
             </ListItem>
           </Link>
 
-          <Link to={"program_outcomes"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <GlobeAsiaAustraliaIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Program Outcomes
+          <Link to="/curriculumPage/program_outcomes">
+            <ListItem button>
+              <ListItemIcon>
+                <GlobeAsiaAustraliaIcon />
+              </ListItemIcon>
+              <ListItemText primary="Program Outcomes" />
             </ListItem>
           </Link>
 
-          <Link to={"course"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <InboxIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Course
-              <ListItemSuffix>
-                <Chip
-                  value="14"
-                  size="sm"
-                  variant="ghost"
-                  color="blue-gray"
-                  className="rounded-full"
-                />
-              </ListItemSuffix>
+          <Link to="/curriculumPage/course">
+            <ListItem button>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Course" />
+              <Chip label="14" variant="outlined" color="primary" size="small" />
             </ListItem>
           </Link>
 
-          <Link to={"course_outcomes"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <GlobeEuropeAfricaIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Course Outcomes
+          <Link to="/curriculumPage/course_outcomes">
+            <ListItem button>
+              <ListItemIcon>
+                <GlobeEuropeAfricaIcon />
+              </ListItemIcon>
+              <ListItemText primary="Course Outcomes" />
             </ListItem>
           </Link>
 
-          <Link to={"copomapping"} relative="route">
-            <ListItem>
-              <ListItemPrefix>
-                <ArrowsUpDownIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              COs POs Mapping
+          <Link to="/curriculumPage/copomapping">
+            <ListItem button>
+              <ListItemIcon>
+                <ArrowsUpDownIcon />
+              </ListItemIcon>
+              <ListItemText primary="COs POs Mapping" />
             </ListItem>
           </Link>
-          {/* <ListItem>
-          <ListItemPrefix>
-            <Cog6ToothIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Settings
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <PowerIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Log Out
-        </ListItem> */}
         </List>
       </Card>
     </div>

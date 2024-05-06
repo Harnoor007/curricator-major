@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography } from '@material-tailwind/react';
+import { Button } from '@mui/material';
 import { generateCsv, download, ConfigOptions } from 'export-to-csv';
 import { ArrowDropUp, ArrowDropDown } from "@mui/icons-material";
 
@@ -30,28 +30,23 @@ const ExportToCsv: React.FC<ExportToCsvProps> = ({ data, type }) => {
 
   return (
     <React.Fragment>
-      {/* import btn */}
+      {/* Import button */}
       <div className="flex flex-row">
         <Button
-          onClick={
-            type === "data" ? handleExportData : () => handleExportRows([])
-          }
-          // variant=""
+          onClick={type === "data" ? handleExportData : () => handleExportRows([])}
           className="flex flex-row"
+          startIcon={<ArrowDropUp />}
         >
-          <ArrowDropUp className="w-5 h-5 mr-1 my-0 " />
           Import
         </Button>
 
-        {/* export btn */}
+        {/* Export button */}
         <Button
-          onClick={
-            type === "data" ? handleExportData : () => handleExportRows([])
-          }
+          onClick={type === "data" ? handleExportData : () => handleExportRows([])}
           variant="outlined"
           className="flex flex-row"
+          startIcon={<ArrowDropDown />}
         >
-          <ArrowDropDown className="w-5 h-5 mr-1 my-0 " />
           Export
         </Button>
       </div>
