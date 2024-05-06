@@ -11,8 +11,11 @@ const courseRoutes = require("./routes/course")
 const coRoutes = require("./routes/course_outcome")
 const copoRoutes = require("./routes/copomapping")
 const authRoutes = require("./routes/auth")
+const connectToMongo = require('./db/db')
 app.use(cors());
 app.use(express.json());
+
+connectToMongo()
 
 // Routes
 app.use("/organization", organizationRoutes);

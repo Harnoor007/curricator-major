@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import AdminDashboard from "../pages/Home/Home.tsx";
 import Attainment from "../pages/Attainment/AttainmentPage";
 import Assesment from "../pages/Assesment/AssesmentPage";
 import CurriculumPage from "../pages/CurriculumDesgin/CurriculumPage";
@@ -20,12 +20,20 @@ import Organization from "../pages/CurriculumDesgin/Organization";
 import Program from "../pages/CurriculumDesgin/Program";
 import Login from "../pages/Authentication/Login";
 import App from "../App.tsx";
+import ProtectedRoute from "../components/protectedRoute.tsx";
+import Nav from "../components/Layout/Nav.tsx";
 
-const Root: React.FC = () => (
+const RouteComponent: React.FC = () => (
+
   <Router>
+    {/* <Nav /> */}
+
     <Routes>
-          {/* <Route path="/" element={<App />}></Route> */}
-      <Route path="/" element={<Login />} />
+
+      {/* <Route path="/" element={<App />}></Route> */}
+      <Route path="/" element={<Navigate to='/home' />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/home" element={<ProtectedRoute path="/home" component={AdminDashboard} />} />
       <Route path="/dashboard" element={<AdminDashboard />} />
       <Route path="/curriculum" element={<CurriculumPage />}>
         <Route index element={<Curriculum />} />
@@ -58,4 +66,4 @@ const Root: React.FC = () => (
   </Router>
 );
 
-export default Root;
+export default RouteComponent;

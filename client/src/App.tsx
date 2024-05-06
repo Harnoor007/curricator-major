@@ -1,16 +1,14 @@
 
 
 import Nav from "./components/Layout/Nav";
-import Root from "./routes/Routes";
-import { BrowserRouter as Router } from "react-router-dom";
+import RouteComponent from "./routes/Routes";
 
 function App() {
 
 
   return (
     <>
-     
-          <Root />
+          <RouteComponent />
        
     </>
   );

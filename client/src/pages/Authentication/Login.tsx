@@ -26,7 +26,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 interface Credentials {
   username: string;
   password: string;
-  name:any;
+  name: any;
 }
 
 export default function Login() {
@@ -41,14 +41,14 @@ export default function Login() {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const isLoggedIn = localStorage.getItem("authtoken");
-  //   if (isLoggedIn) {
-  //     navigate("/home");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("authToken");
+    if (isLoggedIn) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,8 +67,8 @@ export default function Login() {
     setLoading(true);
 
     try {
-     
-   
+
+
 
       const response = await fetch(`http://localhost:5000/auth/login`, {
         method: "POST",
@@ -76,11 +76,16 @@ export default function Login() {
         body: JSON.stringify(credentials),
       });
       const json = await response.json();
-console.log(json)
+      console.log(json)
       if (json.success) {
-     alert("Success")
-        }
-       else {
+        alert("Success")
+        const authToken = json.authToken;
+        console.log(authToken)
+        localStorage.setItem('authToken', authToken);
+        setLoading(false);
+        navigate('/home')
+      }
+      else {
         alert("Fail")
         setLoading(false);
       }
@@ -168,7 +173,7 @@ console.log(json)
           >
             {loading ? <CircularProgress size={24} /> : "Sign In"}
           </Button>
-          
+
         </Box>
       </Box>
     </Container>
