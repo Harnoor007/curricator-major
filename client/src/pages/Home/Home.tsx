@@ -10,7 +10,7 @@ const cardData: HomeCardData[] = [
     id: 0,
     title: 'Curriculum',
     icon: School,
-    path: '/curriculum'
+    path: '/curriculumPage'
   },
   {
     id: 1,

@@ -42,17 +42,10 @@ const RouteComponent: React.FC = () => (
         path="/superadmin"
         element={<ProtectedRoute path="/superadmin" component={SuperAdmin} />}
       />
-      <Route
-        path="/curriculumPage"
-        element={
-          <ProtectedRoute path="/curriculumPage" component={CurriculumPage} />
-        }
-      >
+      {/* Routes for curriculumPage */}
+      <Route path="/curriculumPage" element={<ProtectedRoute path="/curriculumPage" component={CurriculumPage} />} >
         <Route index element={<Organization organizationName={"GNDEC"} />} />
-        <Route
-          path="organization"
-          element={<Organization organizationName={"GNDEC"} />}
-        />
+        <Route path = "organization" element={<Organization organizationName={"GNDEC"} />} />
         <Route path="department" element={<Department />} />
       </Route>
 
