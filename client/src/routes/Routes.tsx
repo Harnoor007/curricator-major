@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import AdminDashboard from "../pages/Home/Home.tsx";
 import Attainment from "../pages/Attainment/AttainmentPage";
 import Assesment from "../pages/Assesment/AssesmentPage";
@@ -21,21 +26,36 @@ import Login from "../pages/Authentication/Login";
 import ProtectedRoute from "../components/protectedRoute.tsx";
 import Nav from "../components/Layout/Nav.tsx";
 import SuperAdmin from "../pages/SuperAdmin/SuperAdmin.tsx";
+import Home from "../pages/Home/Home.tsx";
 
 const RouteComponent: React.FC = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<Navigate to='/home' />} />
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<ProtectedRoute path="/home" component={AdminDashboard} />} />
+      <Route
+        path="/home"
+        element={<ProtectedRoute path="/home" component={Home} />}
+      />
 
-      <Route path="/superadmin" element={<ProtectedRoute path="/superadmin" component={SuperAdmin} />} />
-    {/* Routes for curriculumPage */}      <Route path="/curriculumPage" element={<ProtectedRoute path="/curriculumPage" component={CurriculumPage} />} >
+      <Route
+        path="/superadmin"
+        element={<ProtectedRoute path="/superadmin" component={SuperAdmin} />}
+      />
+      <Route
+        path="/curriculumPage"
+        element={
+          <ProtectedRoute path="/curriculumPage" component={CurriculumPage} />
+        }
+      >
         <Route index element={<Organization organizationName={"GNDEC"} />} />
-        <Route path = "organization" element={<Organization organizationName={"GNDEC"} />} />
+        <Route
+          path="organization"
+          element={<Organization organizationName={"GNDEC"} />}
+        />
         <Route path="department" element={<Department />} />
       </Route>
-      
+
       <Route path="/Assesment" element={<Assesment />}>
         <Route index element={<QuestionBank />} />
         <Route path="extraCurricular" element={<ExtraCurricular />} />
