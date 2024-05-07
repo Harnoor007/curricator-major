@@ -1,21 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { Organization, Department } = require('../models/curricula');
+const { Department } = require('../models/curricula');
 
-// Create department
 // Create department
 router.post('/new-department', async (req, res) => {
   try {
-    const { name, vision, mission, organization, head } = req.body;
+    const { name, vision, mission, year } = req.body;
 
-    // Fetch the organization ObjectId based on its name
-    const org = await Organization.findOne({ name: organization });
-
-    if (!org) {
-      return res.status(400).json({ success: false, error: 'Organization not found.' });
-    }
-
-    const department = new Department({ name, vision, mission, organization: org._id, head });
+    const department = new Department({ name, vision, mission, year });
     const result = await department.save();
 
     res.status(200).json({ success: true, data: result });
@@ -24,16 +16,12 @@ router.post('/new-department', async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
-// Get all departments with populated organization field
-// Get all departments with populated organization name
+
+// Get all departments
 router.get('/all-departments', async (req, res) => {
   try {
-    const departments = await Department.find().populate('organization', 'name');
-    const formattedDepartments = departments.map(department => ({
-      ...department.toObject(),
-      organization: department.organization.name
-    }));
-    res.status(200).json({ success: true, data: formattedDepartments });
+    const departments = await Department.find();
+    res.status(200).json({ success: true, data: departments });
   } catch (error) {
     console.error('Error retrieving departments:', error);
     res.status(500).json({ success: false, error: error.message });
@@ -56,6 +44,7 @@ router.get('/get-department/:name', async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
 // Delete department by name
 router.delete('/delete-department/:name', async (req, res) => {
   try {

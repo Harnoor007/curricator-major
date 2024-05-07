@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  MaterialReactTable,
-  type MRT_ColumnDef,
-} from "material-react-table";
+import { Button, Modal, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateNewEntityButton from "../../components/common/CreateNewRow";
@@ -13,20 +10,20 @@ import {
   deleteDepartment,
 } from "../../utils/db";
 import { DepartmentData } from '../../types/types' 
-import { Button, Modal, TextField } from "@mui/material";
+import { MRT_ColumnDef } from "material-react-table";
+import { MaterialReactTable } from "material-react-table";
 
 const Department = () => {
   const [selectedData, setSelectedData] = useState<DepartmentData[]>([]);
   const [tableData, setTableData] = useState<DepartmentData[]>([]);
   const [rerender, setRerender] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [editData, setEditData] = useState<DepartmentData | null>(null);
   const [formData, setFormData] = useState<Record<string, string>>({
     name: "",
     vision: "",
     mission: "",
-    organization: "",
-    head: ""
+    year:"",
   });
 
   useEffect(() => {
@@ -46,9 +43,7 @@ const Department = () => {
   const handleDeleteRow = useCallback(async (row: DepartmentData) => {
     try {
       if (window.confirm(`Are you sure you want to delete department ${row.name}?`)) {
-        // Call the deleteDepartment function passing the department name
         await deleteDepartment(row.name);
-        // Update the tableData state by filtering out the deleted department
         setTableData((prevData) =>
           prevData.filter((data) => data.name !== row.name)
         );
@@ -61,7 +56,6 @@ const Department = () => {
   const handleAddDepartment = async (newData: Record<string, string>) => {
     try {
       const addedDepartment = await addDepartment(newData as unknown as DepartmentData);
-      // setTableData((prevData) => [...prevData, addedDepartment]);
       setRerender((prev) => !prev);
     } catch (error:any) {
       console.error('Error adding department:', error.message);
@@ -72,8 +66,7 @@ const Department = () => {
     { accessorKey: "name", header: "Name", size: 50 },
     { accessorKey: "vision", header: "Vision", size: 200 },
     { accessorKey: "mission", header: "Mission", size: 200 },
-    { accessorKey: "organization", header: "Organization", size: 50 },
-    { accessorKey: "head", header: "Head", size: 50 },
+    { accessorKey: "year", header: "Year", size: 50 },
   ];   
 
   return (
@@ -87,8 +80,7 @@ const Department = () => {
               name: 'Department Name',
               vision: 'Department Vision',
               mission: 'Department mission',
-              organization: 'Organization Name',
-              head: 'Head',
+              year: 'Year',
             }}
             onSubmit={handleAddDepartment}
           />
@@ -97,14 +89,12 @@ const Department = () => {
         </div>
 
         <MaterialReactTable
-        
           columns={columns}
           data={tableData}
           enableEditing
           enableRowActions
           renderRowActions={({ row }) => (
             <div>
-              {/* <EditIcon onClick={() => console.log('Edit clicked')} color='success' /> */}
               <DeleteIcon onClick={() => handleDeleteRow(row.original)} color='error' />
             </div>
           )}
