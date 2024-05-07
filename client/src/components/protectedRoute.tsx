@@ -1,8 +1,9 @@
 import React from 'react';
 import { jwtDecode } from "jwt-decode";
 import { Navigate } from 'react-router-dom';
-import { SuperAdmin } from '../pages/SuperAdmin/SuperAdmin';
 import Home from '../pages/Home/Home';
+import SuperAdminPage from '../pages/SuperAdmin/SuperAdmin';
+import AddUsers from '../pages/SuperAdmin/AddUsers';
 // import SuperAdmin from '../pages/SuperAdminDashboard/SuperAdmin';
 // import Admin from '../pages/AdminDashboard/AdminDashboard';
 // import Home from '../pages/Home';
@@ -24,6 +25,7 @@ const ProtectedRoute = ({ component: Component, path, ...rest }: { component: an
         try {
             const decodedToken: JwtPayload = jwtDecode(authToken);
             const userRole = decodedToken.role
+            console.log(userRole)
 
             if (path === '/' && userRole) {
                 return <Navigate to="/" replace />;
@@ -33,10 +35,19 @@ const ProtectedRoute = ({ component: Component, path, ...rest }: { component: an
                 return <Navigate to="/home" replace />;
             }
 
+            if (path === '/' && userRole === 'SuperAdmin') {
+                return <Navigate to="/superadmin" replace />;
+            }
 
-            if (userRole === 'superAdmin') {
-                // if (path === '/superadmin/placementStats') {
-                //     return <PlacementStats />
+            if (path === '/login' && userRole === 'SuperAdmin') {
+                return <Navigate to="/superadmin" replace />;
+            }
+
+            
+
+            if (userRole === 'SuperAdmin') {
+                // if (path === '/superadmin/add-users') {
+                //     return <AddUsers />
                 // }
                 // else if (path === '/superadmin/trainingNames') {
                 //     return <TrainingNames />
@@ -45,7 +56,7 @@ const ProtectedRoute = ({ component: Component, path, ...rest }: { component: an
                 //     return <EditProfile />
                 // }
                 // else {
-                    return <SuperAdmin />;
+                    // return <Navigate to="/superadmin" replace />
                 // }
 
                 // } else if (userRole === 'admin') {

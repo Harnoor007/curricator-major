@@ -22,6 +22,7 @@ import Login from "../pages/Authentication/Login";
 import App from "../App.tsx";
 import ProtectedRoute from "../components/protectedRoute.tsx";
 import Nav from "../components/Layout/Nav.tsx";
+import SuperAdmin from "../pages/SuperAdmin/SuperAdmin.tsx";
 
 const RouteComponent: React.FC = () => (
 
@@ -34,8 +35,8 @@ const RouteComponent: React.FC = () => (
       <Route path="/" element={<Navigate to='/home' />} />
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<ProtectedRoute path="/home" component={AdminDashboard} />} />
+      <Route path="/superadmin" element={<ProtectedRoute path="/superadmin" component={SuperAdmin} />} />
       <Route path="/dashboard" element={<AdminDashboard />} />
-
       <Route path="/curriculum" element={<CurriculumPage />}>
         <Route index element={<Curriculum />} />
         <Route path="course" element={<CourseList />} />

@@ -1,14 +1,41 @@
 import React, { useEffect } from "react";
-import SchoolIcon from "@mui/icons-material/School";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import AnalyticsIcon from "@mui/icons-material/Analytics";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import {School, EmojiEvents, Analytics, AccountBox} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { Grid, Card, Typography, Button } from "@mui/material";
+import { Grid, Card } from "@mui/material";
+import { HomeCardData } from "../../types/types";
+import DashboardCard from "../../components/Home/DashboardCard";
+
+const cardData: HomeCardData[] = [
+  {
+    id: 0,
+    title: 'Curriculum',
+    icon: School,
+    path: '/curriculum'
+  },
+  {
+    id: 1,
+    title: 'Attainment',
+    icon: EmojiEvents,
+    path: '/attainment'
+  },
+  {
+    id: 2,
+    title: 'Resources',
+    icon: Analytics,
+    path: '/resources'
+  },
+  {
+    id: 3,
+    title: 'Profile',
+    icon: AccountBox,
+    path: '/profile'
+  }
+]
+
 
 interface AdminDashboardProps { }
 
-  const AdminDashboard: React.FC<AdminDashboardProps> = () => {
+const AdminDashboard: React.FC<AdminDashboardProps> = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,86 +46,18 @@ interface AdminDashboardProps { }
   }, [navigate]);
 
   return (
-    <Card sx={{ padding: "1rem", margin:"5rem" }}>
+    <Card sx={{ padding: "1rem", margin: "5rem" }}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Button
-            onClick={() => navigate("/curriculum")}
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ height: "100%", flex: 1, flexDirection: 'column' }}
-          >
-            <SchoolIcon sx={{ fontSize: "4rem", marginBottom: "0.5rem" }} />
-            <Typography variant="h6" align="center" gutterBottom>
-              Curriculum
-            </Typography>
-            <Typography variant="body1" align="center" paragraph>
-              Design Curriculum, Specify POs, Design Courses, Specify and map
-              COs-POs etc.
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Button
-            onClick={() => navigate("/curriculum")}
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ height: "100%", flex: 1, flexDirection: 'column' }}
-          >
-            <EmojiEventsIcon
-              sx={{ fontSize: "4rem", marginBottom: "0.5rem" }}
-            />
-            <Typography variant="h6" align="center" gutterBottom>
-              Attainment
-            </Typography>
-            <Typography variant="body1" align="center" paragraph>
-              Define threshold levels, Check course/program/consolidated
-              Attainment
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ height: "100%", flex: 1, flexDirection: 'column' }}
 
-          >
-            <AnalyticsIcon
-              sx={{ fontSize: "4rem", marginBottom: "0.5rem" }}
-            />
-            <Typography variant="h6" align="center" gutterBottom>
-              Resources
-            </Typography>
-            <Typography variant="body1" align="center" paragraph>
-              Watch video tutorials, read books, know how to use this system as
-              an educator
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Button
-            onClick={() => navigate("/profile")}
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ height: "100%", flex: 1, flexDirection: 'column' }}
+        {cardData.map((data) => (
+          <Grid item xs={12} md={6}>
+          <DashboardCard key={data.id} {...data} />
+          </Grid>
 
-          >
-            <AccountBoxIcon
-              sx={{ fontSize: "4rem", marginBottom: "0.5rem" }}
-            />
-            <Typography variant="h6" align="center" gutterBottom>
-              Profile
-            </Typography>
-            <Typography variant="body1" align="center" paragraph>
-              Manage profile, view academic details, edit user details
-            </Typography>
-          </Button>
-        </Grid>
+        ))
+        }
+
+
       </Grid>
     </Card>
   );
