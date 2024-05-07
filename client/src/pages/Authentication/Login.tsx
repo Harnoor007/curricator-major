@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
+import useToast from "../../components/common/Toasters/toasthook";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -42,7 +43,7 @@ export default function Login() {
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
-
+const { showToast, ToastComponent } = useToast();
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("authToken");
     if (isLoggedIn) {
@@ -67,9 +68,6 @@ export default function Login() {
     setLoading(true);
 
     try {
-
-
-
       const response = await fetch(`http://localhost:5000/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,18 +76,23 @@ export default function Login() {
       const json = await response.json();
       console.log(json)
       if (json.success) {
-        alert("Success")
+        console.log(json.message)
+        showToast('success',json.message)
         const authToken = json.authToken;
-        console.log(authToken)
         localStorage.setItem('authToken', authToken);
         setLoading(false);
-        navigate('/home')
+       
+         setTimeout(() => {
+            navigate("/home");
+         }, 1000);
       }
       else {
-        alert("Fail")
+        console.log(json.message);
+        showToast('error', json.message);
         setLoading(false);
       }
     } catch (error) {
+      showToast("error", "Invalid operation");
       console.error(error);
       setLoading(false);
     }
@@ -108,6 +111,7 @@ export default function Login() {
 
   return (
     <Container component="main" maxWidth="xs" style={{ marginBottom: "100px" }}>
+      <ToastComponent />
       <CssBaseline />
       <Box
         sx={{
@@ -134,6 +138,7 @@ export default function Login() {
             autoFocus
             error={Boolean(errors.username)}
             helperText={errors.username}
+            InputLabelProps={{ shrink: true }}
           />
           <TextField
             margin="normal"
@@ -146,6 +151,7 @@ export default function Login() {
             onChange={handleChange}
             error={Boolean(errors.password)}
             helperText={errors.password}
+            InputLabelProps={{ shrink: true }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -173,7 +179,6 @@ export default function Login() {
           >
             {loading ? <CircularProgress size={24} /> : "Sign In"}
           </Button>
-
         </Box>
       </Box>
     </Container>
