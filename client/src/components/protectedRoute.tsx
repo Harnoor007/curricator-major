@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import SuperAdminPage from "../pages/SuperAdmin/SuperAdmin";
 import AddUsers from "../pages/SuperAdmin/AddUsers";
+import CurriculumPage from "../pages/CurriculumDesgin/CurriculumPage";
 // import SuperAdmin from '../pages/SuperAdminDashboard/SuperAdmin';
 // import Admin from '../pages/AdminDashboard/AdminDashboard';
 // import Home from '../pages/Home';
@@ -40,26 +41,34 @@ const ProtectedRoute = ({
                             }
                 */
             }
-            if (path === "/login" && userRole) {
-                return <Navigate to="/home" replace />;
-            }
+            // if (path === "/login" && userRole) {
+            //     return <Navigate to="/home" replace />;
+            // }
 
-            if (path === "/" && userRole === "SuperAdmin") {
-                return <Navigate to="/superadmin" replace />;
-            }
+            // if (path === "/" && userRole === "SuperAdmin") {
+            //     return <Navigate to="/superadmin" replace />;
+            // }
 
-            if (path === "/login" && userRole === "SuperAdmin") {
-                return <Navigate to="/superadmin" replace />;
-            }
+            // if (path === "/login" && userRole === "SuperAdmin") {
+            //     return <Navigate to="/superadmin" replace />;
+            // }
 
-            if (path == "/home" && userRole === "SuperAdmin") {
-                return <Navigate to="/superadmin" replace />;
-            }
+            // if (path == "/home" && userRole === "SuperAdmin") {
+            //     return <Navigate to="/superadmin" replace />;
+            // }
+
+            // if (path == "/curriculumPage" && userRole === "SuperAdmin") {
+            //     return <Navigate to="/curriculumPage" replace />;
+            // }
+
+
+            
+
 
             if (userRole === "SuperAdmin") {
-                // if (path === '/superadmin/add-users') {
-                //     return <AddUsers />
-                // }
+                if (path === '/curriculumPage') {
+                    return <CurriculumPage />
+                }
                 // else if (path === '/superadmin/trainingNames') {
                 //     return <TrainingNames />
                 // }
