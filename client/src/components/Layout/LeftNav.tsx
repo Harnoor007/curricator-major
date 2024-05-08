@@ -46,7 +46,7 @@ export default function DefaultSidebar() {
             </ListItem>
           </Link>
 
-          <Link to="/program">
+          <Link to="/curriculumPage/program">
             <ListItem button>
               <ListItemIcon>
                 <BookmarkIcon />
@@ -55,7 +55,7 @@ export default function DefaultSidebar() {
             </ListItem>
           </Link>
 
-          <Link to="/curriculumPage/design">
+          <Link to="/curriculumPage/curriculum">
             <ListItem button>
               <ListItemIcon>
                 <AcademicCapIcon />

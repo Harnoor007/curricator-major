@@ -6,7 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 type CreateNewEntityButtonProps = {
   attributes: Record<string, string>; // Define the attributes dynamically
-  onSubmit: (newData: Record<string, string | Date>) => void;
+  onSubmit: (newData: Record<string, string>) => void;
 };
 
 const CreateNewEntityButton: React.FC<CreateNewEntityButtonProps> = ({
@@ -40,8 +40,9 @@ const CreateNewEntityButton: React.FC<CreateNewEntityButtonProps> = ({
     <>
       <Button
         onClick={handleOpen}
-        className="flex flex-row"
-        variant="contained"
+        className='flex flex-row'
+        variant="contained" // Adding a variant for styling
+        color="primary" // Adding a color for styling
       >
         Create New
       </Button>

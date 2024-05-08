@@ -55,7 +55,7 @@ const Department = () => {
 
   const handleAddDepartment = async (newData: Record<string, string>) => {
     try {
-      
+
       const addedDepartment = await addDepartment(newData as unknown as DepartmentData);
       setRerender((prev) => !prev);
     } catch (error:any) {
@@ -76,15 +76,17 @@ const Department = () => {
         <legend className="text-3xl py-7">Departments</legend>
 
         <div className="flex flex-row justify-between mb-3">
-          <CreateNewEntityButton 
-            attributes={{
-              name: 'Department Name',
-              vision: 'Department Vision',
-              mission: 'Department mission',
-              year: 'Year',
-            }}
-            onSubmit={handleAddDepartment}
-          />
+        <CreateNewEntityButton 
+  attributes={{
+    name: 'Department Name',
+    vision: 'Department Vision',
+    mission: 'Department mission',
+    year: 'Year',
+  }}
+ 
+  onSubmit={handleAddDepartment}
+/>
+
 
           <ExportToCsv data={tableData} type="data" />
         </div>
