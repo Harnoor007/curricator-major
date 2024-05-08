@@ -55,6 +55,7 @@ const Department = () => {
 
   const handleAddDepartment = async (newData: Record<string, string>) => {
     try {
+      
       const addedDepartment = await addDepartment(newData as unknown as DepartmentData);
       setRerender((prev) => !prev);
     } catch (error:any) {

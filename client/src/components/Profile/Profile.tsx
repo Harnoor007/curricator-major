@@ -8,10 +8,7 @@ import {
   Button,
   Grid,
 } from '@mui/material';
-
-const departments = ['CSE', 'IT', 'ECE', 'EE', 'CE', 'ME'];
-const designations = ['PROFESSOR', 'ASSOCIATE PROFESSOR', 'ASSISTANT PROFESSOR', 'STUDENT'];
-const userGroups = ['SUPER ADMIN', 'ADMIN', 'USER'];
+import { departments,userGroups,designations } from '../../utils/constant';
 
 const ProfilePage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -81,11 +78,12 @@ const ProfilePage: React.FC = () => {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            onFocus={() => handleFocus('firstName')}
-            onBlur={() => handleBlur('firstName')}
+            onFocus={() => handleFocus("firstName")}
+            onBlur={() => handleBlur("firstName")}
             required
             error={errors.firstName}
             helperText={errors.firstName ? "This is a required field" : ""}
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -95,11 +93,12 @@ const ProfilePage: React.FC = () => {
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            onFocus={() => handleFocus('lastName')}
-            onBlur={() => handleBlur('lastName')}
+            onFocus={() => handleFocus("lastName")}
+            onBlur={() => handleBlur("lastName")}
             required
             error={errors.lastName}
             helperText={errors.lastName ? "This is a required field" : ""}
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -110,11 +109,12 @@ const ProfilePage: React.FC = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            onFocus={() => handleFocus('email')}
-            onBlur={() => handleBlur('email')}
+            onFocus={() => handleFocus("email")}
+            onBlur={() => handleBlur("email")}
             required
             error={errors.email}
             helperText={errors.email ? "This is a required field" : ""}
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -124,12 +124,15 @@ const ProfilePage: React.FC = () => {
               value={formData.department}
               onChange={handleSelectChange}
               name="department"
-              onFocus={() => handleFocus('department')}
-              onBlur={() => handleBlur('department')}
+              onFocus={() => handleFocus("department")}
+              onBlur={() => handleBlur("department")}
               error={errors.department}
+              InputLabelProps={{ shrink: true }}
             >
               {departments.map((department) => (
-                <MenuItem key={department} value={department}>{department}</MenuItem>
+                <MenuItem key={department} value={department}>
+                  {department}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -141,11 +144,12 @@ const ProfilePage: React.FC = () => {
             name="qualification"
             value={formData.qualification}
             onChange={handleChange}
-            onFocus={() => handleFocus('qualification')}
-            onBlur={() => handleBlur('qualification')}
+            onFocus={() => handleFocus("qualification")}
+            onBlur={() => handleBlur("qualification")}
             required
             error={errors.qualification}
             helperText={errors.qualification ? "This is a required field" : ""}
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -155,11 +159,12 @@ const ProfilePage: React.FC = () => {
             name="experience"
             value={formData.experience}
             onChange={handleChange}
-            onFocus={() => handleFocus('experience')}
-            onBlur={() => handleBlur('experience')}
+            onFocus={() => handleFocus("experience")}
+            onBlur={() => handleBlur("experience")}
             required
             error={errors.experience}
             helperText={errors.experience ? "This is a required field" : ""}
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -170,11 +175,12 @@ const ProfilePage: React.FC = () => {
             name="resetPassword"
             value={formData.resetPassword}
             onChange={handleChange}
-            onFocus={() => handleFocus('resetPassword')}
-            onBlur={() => handleBlur('resetPassword')}
+            onFocus={() => handleFocus("resetPassword")}
+            onBlur={() => handleBlur("resetPassword")}
             required
             error={errors.resetPassword}
             helperText={errors.resetPassword ? "This is a required field" : ""}
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -185,11 +191,18 @@ const ProfilePage: React.FC = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            onFocus={() => handleFocus('confirmPassword')}
-            onBlur={() => handleBlur('confirmPassword')}
+            onFocus={() => handleFocus("confirmPassword")}
+            onBlur={() => handleBlur("confirmPassword")}
+            InputLabelProps={{ shrink: true }}
             required
             error={errors.confirmPassword || errors.passwordMismatch} // Include passwordMismatch error
-            helperText={errors.confirmPassword ? "This is a required field" : errors.passwordMismatch ? "Passwords do not match" : ""}
+            helperText={
+              errors.confirmPassword
+                ? "This is a required field"
+                : errors.passwordMismatch
+                ? "Passwords do not match"
+                : ""
+            }
           />
         </Grid>
         <Grid item xs={6}>
@@ -199,12 +212,14 @@ const ProfilePage: React.FC = () => {
               value={formData.designation}
               onChange={handleSelectChange}
               name="designation"
-              onFocus={() => handleFocus('designation')}
-              onBlur={() => handleBlur('designation')}
+              onFocus={() => handleFocus("designation")}
+              onBlur={() => handleBlur("designation")}
               error={errors.designation}
             >
               {designations.map((designation) => (
-                <MenuItem key={designation} value={designation}>{designation}</MenuItem>
+                <MenuItem key={designation} value={designation}>
+                  {designation}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -216,19 +231,26 @@ const ProfilePage: React.FC = () => {
               value={formData.userGroup}
               onChange={handleSelectChange}
               name="userGroup"
-              onFocus={() => handleFocus('userGroup')}
-              onBlur={() => handleBlur('userGroup')}
+              onFocus={() => handleFocus("userGroup")}
+              onBlur={() => handleBlur("userGroup")}
               error={errors.userGroup}
             >
               {userGroups.map((userGroup) => (
-                <MenuItem key={userGroup} value={userGroup}>{userGroup}</MenuItem>
+                <MenuItem key={userGroup} value={userGroup}>
+                  {userGroup}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
         </Grid>
       </Grid>
       <div className="mt-4">
-        <Button type="submit" variant="contained" color="primary" className="mr-2">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="mr-2"
+        >
           Save
         </Button>
         <Button type="submit" variant="contained" color="primary">
