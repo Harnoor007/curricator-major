@@ -1,230 +1,242 @@
-import { Checkbox, Option, Select } from "@material-tailwind/react";
-import React, { useState } from "react";
-import { Button } from '@material-tailwind/react';
-import EditIcon from "@mui/icons-material/Edit";
-const Profile: React.FC = () => {
-  const [isLogHistoryEnabled, setLogHistoryEnabled] = useState<boolean>(false);
+import React, { useState } from 'react';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Button,
+  Grid,
+} from '@mui/material';
 
-  const handleLogHistoryToggle = () => {
-    setLogHistoryEnabled(!isLogHistoryEnabled);
+const departments = ['CSE', 'IT', 'ECE', 'EE', 'CE', 'ME'];
+const designations = ['PROFESSOR', 'ASSOCIATE PROFESSOR', 'ASSISTANT PROFESSOR', 'STUDENT'];
+const userGroups = ['SUPER ADMIN', 'ADMIN', 'USER'];
+
+const ProfilePage: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    department: '',
+    qualification: '',
+    experience: '',
+    resetPassword: '',
+    confirmPassword: '',
+    designation: '',
+    userGroup: '',
+  });
+
+  const [errors, setErrors] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    department: false,
+    qualification: false,
+    experience: false,
+    resetPassword: false,
+    confirmPassword: false,
+    designation: false,
+    userGroup: false,
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSelectChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name as string]: value as string });
+  };
+
+  const handleFocus = (name: string) => {
+    setErrors({ ...errors, [name]: false });
+  };
+
+  const handleBlur = (name: string) => {
+    if (!formData[name]) {
+      setErrors({ ...errors, [name]: true });
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (formData.resetPassword !== formData.confirmPassword) {
+      setErrors({ ...errors, passwordMismatch: true });
+    } else {
+      // Reset password mismatch error if passwords match
+      setErrors({ ...errors, passwordMismatch: false });
+      console.log(formData);
+    }
   };
 
   return (
-    <div className="profile">
-      <header className="bg-teal-700 text-white py-4 px-6 rounded-md mx-12">
-        <h1 className="text-3xl font-semibold text-center">Profile</h1>
-        {/* Add any additional information here */}
-      </header>
-      <div className="min-h-screen flex justify-between">
-        <div className="w-96 h-96 rounded-md  bg-gray-200 my-12 flex items-center justify-center p-8 ml-12">
-          {/* Image Column */}
-          <div className="">
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-              alt="Profile Picture"
-              className=" w-32 h-32 rounded-full"
-            />
-          </div>
-        </div>
-
-        <div className="w-full md:w-2/3 p-6 bg-gray-200 rounded-md mt-12 mr-12">
-          <div className=" mb-6 col-span-2 mt-4 flex flex-row justify-between">
-            <div className="flex items-center space-x-2">
-              <label
-                htmlFor="logHistory"
-                className="block text-l font-medium text-gray-700"
-              >
-                Log History
-              </label>
-              <Checkbox
-                crossOrigin={undefined}
-                color="teal"
-                onClick={handleLogHistoryToggle}
-              />
-            </div>
-            <div className="flex flex-row gap-3">
-              <Button variant="outlined">
-                <EditIcon className="w-5 h-5 mr-1 my-0 " />
-                {/* Edit */}
-              </Button>
-              <Button>Save</Button>
-            </div>
-          </div>
-          <form>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-md ==">
-              {/* <div className="mb-4">
-              </div> */}
-              <div className="mb-4">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email ID <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="user@institution.com"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  First Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="User"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="lastName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Last Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="User"
-                />
-              </div>
-
-              <div className="mb-4">
-                <label
-                  htmlFor="department"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Department <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="department"
-                  name="department"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="Applied Science"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="qualification"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Qualification <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="qualification"
-                  name="qualification"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="PhD"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="experience"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Experience (in years) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  id="experience"
-                  name="experience"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="20"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="designation"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Designation <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="designation"
-                  name="designation"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="Assistant Professor"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="resetPassword"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Reset Password <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="password"
-                  id="resetPassword"
-                  name="resetPassword"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="password1"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="userGroup"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  User Group <span className="text-red-500">*</span>
-                </label>
-                <Select
-                  id="userGroup"
-                  name="userGroup"
-                  className="mt-1 p-2 rounded-md w-full bg-white"
-                  value="Course Owner"
-                >
-                  <Option value="Admin">Admin</Option>
-                  <Option value="Chairman">Chairman</Option>
-                  <Option value="CourseOwner">Course Owner</Option>
-                  <Option value="Director">Director</Option>
-                  <Option value="ProgramOwner">Program Owner</Option>
-                </Select>
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Confirm Password <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  required
-                  className="mt-1 p-2 border rounded-md w-full"
-                  value="password1"
-                />
-              </div>
-            </div>
-          </form>
-        </div>
+    <form onSubmit={handleSubmit} className="bg-white p-4">
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextField
+            label="First Name"
+            fullWidth
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            onFocus={() => handleFocus('firstName')}
+            onBlur={() => handleBlur('firstName')}
+            required
+            error={errors.firstName}
+            helperText={errors.firstName ? "This is a required field" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Last Name"
+            fullWidth
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            onFocus={() => handleFocus('lastName')}
+            onBlur={() => handleBlur('lastName')}
+            required
+            error={errors.lastName}
+            helperText={errors.lastName ? "This is a required field" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Email ID"
+            fullWidth
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            onFocus={() => handleFocus('email')}
+            onBlur={() => handleBlur('email')}
+            required
+            error={errors.email}
+            helperText={errors.email ? "This is a required field" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl fullWidth required>
+            <InputLabel>Department</InputLabel>
+            <Select
+              value={formData.department}
+              onChange={handleSelectChange}
+              name="department"
+              onFocus={() => handleFocus('department')}
+              onBlur={() => handleBlur('department')}
+              error={errors.department}
+            >
+              {departments.map((department) => (
+                <MenuItem key={department} value={department}>{department}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Qualification"
+            fullWidth
+            name="qualification"
+            value={formData.qualification}
+            onChange={handleChange}
+            onFocus={() => handleFocus('qualification')}
+            onBlur={() => handleBlur('qualification')}
+            required
+            error={errors.qualification}
+            helperText={errors.qualification ? "This is a required field" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Experience"
+            fullWidth
+            name="experience"
+            value={formData.experience}
+            onChange={handleChange}
+            onFocus={() => handleFocus('experience')}
+            onBlur={() => handleBlur('experience')}
+            required
+            error={errors.experience}
+            helperText={errors.experience ? "This is a required field" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Reset Password"
+            fullWidth
+            type="password"
+            name="resetPassword"
+            value={formData.resetPassword}
+            onChange={handleChange}
+            onFocus={() => handleFocus('resetPassword')}
+            onBlur={() => handleBlur('resetPassword')}
+            required
+            error={errors.resetPassword}
+            helperText={errors.resetPassword ? "This is a required field" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Confirm Password"
+            fullWidth
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            onFocus={() => handleFocus('confirmPassword')}
+            onBlur={() => handleBlur('confirmPassword')}
+            required
+            error={errors.confirmPassword || errors.passwordMismatch} // Include passwordMismatch error
+            helperText={errors.confirmPassword ? "This is a required field" : errors.passwordMismatch ? "Passwords do not match" : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl fullWidth required>
+            <InputLabel>Designation</InputLabel>
+            <Select
+              value={formData.designation}
+              onChange={handleSelectChange}
+              name="designation"
+              onFocus={() => handleFocus('designation')}
+              onBlur={() => handleBlur('designation')}
+              error={errors.designation}
+            >
+              {designations.map((designation) => (
+                <MenuItem key={designation} value={designation}>{designation}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl fullWidth required>
+            <InputLabel>User Group</InputLabel>
+            <Select
+              value={formData.userGroup}
+              onChange={handleSelectChange}
+              name="userGroup"
+              onFocus={() => handleFocus('userGroup')}
+              onBlur={() => handleBlur('userGroup')}
+              error={errors.userGroup}
+            >
+              {userGroups.map((userGroup) => (
+                <MenuItem key={userGroup} value={userGroup}>{userGroup}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+      <div className="mt-4">
+        <Button type="submit" variant="contained" color="primary" className="mr-2">
+          Save
+        </Button>
+        <Button type="submit" variant="contained" color="primary">
+          Update
+        </Button>
       </div>
-    </div>
+    </form>
   );
 };
 
-export default Profile;
+export default ProfilePage;
