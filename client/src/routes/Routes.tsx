@@ -47,6 +47,13 @@ const RouteComponent: React.FC = () => (
         <Route index element={<Organization organizationName={"GNDEC"} />} />
         <Route path = "organization" element={<Organization organizationName={"GNDEC"} />} />
         <Route path="department" element={<Department />} />
+        <Route path="program" element={<Program />} />
+        <Route path="curriculum" element={<Curriculum />} />
+        <Route path="program_outcomes" element={<Program_Outcomes />} />
+        <Route path="course" element={<CourseList />} />
+        <Route path="course_outcomes" element={<CourseOutcomes />} />
+        <Route path="copomapping" element={<CopoMapping />} />
+
       </Route>
 
       <Route path="/Assesment" element={<Assesment />}>

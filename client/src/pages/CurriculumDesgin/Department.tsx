@@ -75,15 +75,19 @@ const Department = () => {
         <legend className="text-3xl py-7">Departments</legend>
 
         <div className="flex flex-row justify-between mb-3">
-          <CreateNewEntityButton 
-            attributes={{
-              name: 'Department Name',
-              vision: 'Department Vision',
-              mission: 'Department mission',
-              year: 'Year',
-            }}
-            onSubmit={handleAddDepartment}
-          />
+        <CreateNewEntityButton 
+  attributes={{
+    name: 'Department Name',
+    vision: 'Department Vision',
+    mission: 'Department mission',
+    year: 'Year',
+  }}
+  useDatePicker={{
+    year: true, // Use DatePicker for the 'year' attribute
+  }}
+  onSubmit={handleAddDepartment}
+/>
+
 
           <ExportToCsv data={tableData} type="data" />
         </div>
