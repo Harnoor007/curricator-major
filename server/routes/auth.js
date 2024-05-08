@@ -82,7 +82,7 @@ router.post('/login', async (req, res) => {
       };
       const authToken = jwt.sign(data, JWT_Token);
   
-      return res.status(200).json({ success: true, authToken: authToken, body: data });
+      return res.status(200).json({ success: true, authToken: authToken, body: data , message:"Successfully logined" });
     }
       return res.status(400).json({ success: false, message: "Please try to login with the correct credentials" });
 });
